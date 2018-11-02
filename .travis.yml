@@ -2,8 +2,9 @@ language: csharp
 dist: trusty
 mono: none
 dotnet: 2.0
-solution: solution-name.sln
+solution: Blazor.Payments.sln
 install:
   - dotnet restore
 script:
   - dotnet build
+  - dotnet pack ./Blazor.Payments -c Release -o ./artifacts --version-suffix=$revision
