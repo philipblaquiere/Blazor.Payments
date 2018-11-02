@@ -6,6 +6,8 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.1</LangVersion>
+    <Authors>Philip Blaquiere</Authors>
+    <PackageId>PhilipBlaquiere.Blazor.Payments</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
