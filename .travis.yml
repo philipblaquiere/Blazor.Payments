@@ -8,4 +8,3 @@ install:
 script:
   - dotnet build
   - dotnet pack ./Blazor.Payments -c Release -o ./artifacts
-  - dotnet nuget push ./Blazor.Payments/artifacts/PhilipBlaquiere.Blazor.Payments.*.nupkg -s https://www.nuget.org/api/v2/package -k $NUGET_API_KEY
