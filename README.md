@@ -70,4 +70,4 @@ The following aren't yet working on Blazor.Payments
 
 ## Roadmap
 
-The Web Payment Request API is still in its very early stages. Both its contracted (defined by the w3c) as well as its implementation in its major browsers are in a very early stage. Bare in mind this library is for experimental purposes only. Share your thoughts, comments, and most importantly your suggestions. 
+The Web Payment Request API is still in its very early stages. Both its contract (defined by the w3c) as well as its implementation in  major browsers are in early stages. Bare in mind this library is for experimental purposes only. Share your thoughts, comments, and most importantly your suggestions. 
