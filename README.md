@@ -37,6 +37,10 @@ Then, await the request's `Show()` function to call the browser's Web Payment Re
 await paymentRequest.Show();
 ```
 
+To verify if the browser supports the Payment Request:
+```csharp
+bool canMakePayment = await WebPaymentHelper.CanMakePayment();
+```
 ### Configuration
 A user may trigger events while interacting with the Browser's Payment Request UI. Blazor.Payments allows the delegation of execution by defining handlers. These handlers are registered as build step `.Configure`.
 
