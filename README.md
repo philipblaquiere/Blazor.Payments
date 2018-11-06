@@ -22,7 +22,7 @@ Three objects are needed to instantiate a Payment Request:
 
 * `PaymentMethods[]` [doc](https://w3c.github.io/payment-request/#the-methoddata-argument)
 * `PaymentDetailsInit`[doc](https://w3c.github.io/payment-request/#the-details-argument)
-* `ShippingOptions`(optional) [doc](https://w3c.github.io/payment-request/#shipping-options)  
+* `PaymentOptions`(optional) [doc](https://w3c.github.io/payment-request/#paymentoptions-dictionary)  
 
 A Web Payment Request instance can then be created by using the provided builder `PaymentRequestBuilder`:
 
