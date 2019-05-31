@@ -1,0 +1,235 @@
+﻿@page "/"
+@using Blazor.Payments
+@using Blazor.Payments.Data
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<button onclick="@ShowPayment">Payment</button>
+
+<button onclick="@CanMakePayment">@canMakePayment</button>
+
+<p>@ok</p>
+<p>@message</p>
+
+@functions {
+	static string message;
+	bool canMakePayment = false;
+	string ok;
+
+	async Task CanMakePayment()
+	{
+		canMakePayment = await WebPaymentHelper.CanMakePayment();
+	}
+
+	async Task ShowPayment()
+	{
+		var paymentMethod = new PaymentMethod[]
+		{
+			new PaymentMethod(
+				supportedMethods: "basic-card",
+				supportedNetworks: new [] {"visa", "mastercard", "amex"})
+		};
+
+		var paymentMethods = new PaymentMethod[]
+		{
+			new PaymentMethod(
+				supportedMethods: "basic-card",
+				supportedNetworks: new [] {"visa", "mastercard", "amex"},
+				supportedTypes: new [] {"credit", "debit" }),
+			new PaymentMethod(
+				supportedMethods: "https://google.com/pay")
+		};
+
+		var paymentDetails = new PaymentDetailsInit(
+			displayItems: new PaymentItem[]
+			{
+				new PaymentItem(
+					label: "Anvil L/S Crew Neck - Grey M x1",
+					amount: new PaymentCurrencyAmount(
+						currency: "USD",
+						value:"22.15")
+				),
+				new PaymentItem(
+					label: "Tasty Lollipop",
+					pending: true,
+					amount: new PaymentCurrencyAmount(
+						currency:"USD",
+						value: "2.85")
+				)
+			},
+			shippingOptions: new PaymentShippingOptions[]
+			{
+				new PaymentShippingOptions(
+					id: "Standard",
+					label: "Standard Delivery",
+					amount:new PaymentCurrencyAmount(
+						currency: "USD",
+						value: "5.00"),
+					selected:true),
+				new PaymentShippingOptions(
+					id: "Express",
+					label: "Express Delivery",
+					amount:new PaymentCurrencyAmount(
+						currency: "USD",
+						value: "15.00"),
+					selected:false)
+					},
+					total: new PaymentItem(
+						label: "Total",
+						amount: new PaymentCurrencyAmount(
+							currency: "USD",
+							value: "25.00")
+					)
+		);
+
+		var paymentOptions = new PaymentOptions(
+			requestShipping: true,
+			shippingType: PaymentShippingType.Pickup);
+
+		var webPayment = PaymentRequestBuilder
+			.CreateDefaultPaymentRequest(paymentDetails)
+			.AddPaymentMethod(pmb => pmb
+				.CreateBasicCardPaymentMethod()
+				.AddSupportedNetwork(SupportedNetworkType.Visa)
+				.AddSupportedNetwork(SupportedNetworkType.Discover)
+				.AddSupportedNetwork(SupportedNetworkType.Mastercard)
+				.AddSupportedType(SupportedTypesType.Credit)
+				.AddSupportedType(SupportedTypesType.Debit)
+				.Build()
+			)
+			.AddPaymentMethod(pmb => pmb
+				.CreateUrlPaymentMethod(SupportedMethodsType.GooglePay)
+				.Build()
+			)
+			.AddPaymentOptions(pob => pob
+				.RequestPayerEmail()
+				.RequestShipping()
+				.ShippingOption(PaymentShippingType.Shipping)
+				.Build()
+			)
+			.Configure(configuration =>
+			{
+				configuration.PaymentExceptionAsync = OnPaymentException;
+				configuration.PaymentResponseAsync = OnPaymentResponse;
+				configuration.ShippingAddressChangedAsync = OnShippingAddressChanged;
+				configuration.ShippingOptionChangedAsync = OnShippingOptionChanged;
+			})
+			.Build();
+
+		await webPayment.Show();
+	}
+
+
+	public async Task<PaymentComplete> OnPaymentResponse(PaymentResponse paymentResponse)
+	{
+		// Simulate Work
+		await Task.Delay(500);
+		message = string.Join(", ", paymentResponse.shippingAddress.AddressLine);
+		return new PaymentComplete(PaymentCompleteType.Success);
+	}
+
+	public async Task<PaymentDetailsUpdate> OnShippingOptionChanged(string selectedId)
+	{
+		var paymentDetailsUpdate = new PaymentDetailsUpdate(
+			displayItems: new PaymentItem[]
+			{
+				new PaymentItem(
+					label: "Anvil L/S Crew Neck - Grey M x1",
+					amount: new PaymentCurrencyAmount(
+						currency: "USD",
+						value:"22.15")
+				),
+				new PaymentItem(
+					label: "Tasy Lollipop",
+					amount: new PaymentCurrencyAmount(
+						currency:"USD",
+						value: "2.85")
+				)
+			},
+			shippingOptions: new PaymentShippingOptions[]
+			{
+				new PaymentShippingOptions(
+					id: "Standard",
+					label: "Standard Delivery",
+					amount:new PaymentCurrencyAmount(
+						currency: "USD",
+						value: "35.00"),
+					selected:true),
+				new PaymentShippingOptions(
+					id: "Express",
+					label: "Express Delivery",
+					amount:new PaymentCurrencyAmount(
+						currency: "USD",
+						value: "95.00"),
+					selected:true)
+			},
+			total: new PaymentItem(
+				label: "Total",
+				amount: new PaymentCurrencyAmount(
+					currency: "USD",
+					value: "225.00")
+			)
+		);
+
+		await Task.Delay(500);
+
+		return paymentDetailsUpdate;
+	}
+
+	public async Task<PaymentDetailsUpdate> OnShippingAddressChanged(PaymentAddress address)
+	{
+		var paymentDetailsUpdate = new PaymentDetailsUpdate(
+			total: new PaymentItem(
+				label: "Total",
+				amount: new PaymentCurrencyAmount(
+					currency: "USD",
+					value: "226.00")
+			),
+			displayItems: new PaymentItem[]
+			{
+				new PaymentItem(
+					label: "Anvil L/S Crew Neck - Grey M x1",
+					amount: new PaymentCurrencyAmount(
+						currency: "USD",
+						value:"22.15")
+				),
+				new PaymentItem(
+					label: "ink Lollipop",
+					amount: new PaymentCurrencyAmount(
+						currency:"USD",
+						value: "2.85")
+				)
+			},
+			shippingOptions: new PaymentShippingOptions[]
+			{
+				new PaymentShippingOptions(
+					id: "Standard",
+					label: "Standard Delivery",
+					amount:new PaymentCurrencyAmount(
+						currency: "USD",
+						value: "235.00"),
+					selected:true),
+				new PaymentShippingOptions(
+					id: "Express",
+					label: "Express Delivery",
+					amount:new PaymentCurrencyAmount(
+						currency: "USD",
+						value: "362.00"),
+					selected:true)
+			});
+
+		await Task.Delay(500);
+
+		return paymentDetailsUpdate;
+	}
+
+	public async Task OnPaymentException(PaymentException e)
+	{
+		await Task.Delay(500);
+		message = e.message;
+	}
+}
