@@ -7,5 +7,5 @@ install:
   - dotnet restore
 script:
   - dotnet build
-  - dotnet pack ./Blazor.Playground/Blazor.Payments -c Release -o ./artifacts
-  - dotnet nuget push ./Blazor.Playground/Blazor.Payments/artifacts/PhilipBlaquiere.Blazor.Payments.*.nupkg -s https://www.nuget.org/api/v2/package -k $NUGET_API_KEY
+  - dotnet pack ./Blazor.Payments -c Release -o ./artifacts
+  - dotnet nuget push ./Blazor.Payments/artifacts/PhilipBlaquiere.Blazor.Payments.*.nupkg -s https://www.nuget.org/api/v2/package -k $NUGET_API_KEY
