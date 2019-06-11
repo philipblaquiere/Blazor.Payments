@@ -1,6 +1,6 @@
 ﻿# Blazor.Payments
 
-[![Build Status](https://travis-ci.org/philipblaquiere/Blazor.Payments.svg?branch=master)](https://travis-ci.org/philipblaquiere/Blazor.Payments) [![NuGet](https://img.shields.io/nuget/vpre/PhilipBlaquiere.Blazor.Payments.svg)](https://www.nuget.org/packages/PhilipBlaquiere.Blazor.Payments/)
+[![Build Status](https://travis-ci.org/philipblaquiere/Blazor.Payments.svg?branch=master)](https://travis-ci.org/philipblaquiere/Blazor.Payments) [![NuGet](https://img.shields.io/nuget/v/PhilipBlaquiere.Blazor.Payments.svg)](https://www.nuget.org/packages/PhilipBlaquiere.Blazor.Payments/0.1.1)
 
 Blazor.Payments library brings the W3C API Web Payment standard to Blazor-enabled Web Apps. This library attempts to replicate the Payment Request API documented and updated on [w3c.github.io/payment-request](https://w3c.github.io/payment-request/.).
 
@@ -12,13 +12,13 @@ First add a reference to the nuget package through:
 Package Manager
 
 ```sh
-PM> Install-Package PhilipBlaquiere.Blazor.Payments -Version 1.0.0
+PM> Install-Package PhilipBlaquiere.Blazor.Payments -Version 0.1.1
 ```
 
 dotnet CLI:
 
 ```sh
-> dotnet add package PhilipBlaquiere.Blazor.Payments --version 1.0.0
+> dotnet add package PhilipBlaquiere.Blazor.Payments --version 0.1.1
 ```
 
 ## Develop
