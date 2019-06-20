@@ -72,7 +72,7 @@ function getPaymentDetails(paymentDetailsResponse) {
         paymentDetails.total = paymentDetailsResponse.total;
     }
     if (paymentDetailsResponse.error !== null) {
-        paymentDetailspaymentDetails.error = paymentDetailsResponse.error;
+        paymentDetails.error = paymentDetailsResponse.error;
     }
     if (paymentDetailsResponse.shippingAddressErrors !== null) {
         paymentDetails.shippingAddressErrors = paymentDetailsResponse.shippingAddressErrors;
