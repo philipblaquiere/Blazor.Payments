@@ -1,6 +1,5 @@
 ﻿# Blazor.Payments
-
-[![Build Status](https://dev.azure.com/philipblaquiere/Blazor.Payments/_apis/build/status/philipblaquiere.Blazor.Payments?branchName=master)](https://dev.azure.com/philipblaquiere/Blazor.Payments/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/philipblaquiere/Blazor.Payments/_apis/build/status/philipblaquiere.Blazor.Payments?branchName=master)](https://dev.azure.com/philipblaquiere/Blazor.Payments/_build/latest?definitionId=1&branchName=master) [![NuGet](https://img.shields.io/nuget/v/PhilipBlaquiere.Blazor.Payments.svg)](https://www.nuget.org/packages/PhilipBlaquiere.Blazor.Payments/1.0.1)
 
 Blazor.Payments library brings the W3C API Web Payment standard to Blazor-enabled Web Apps. This library attempts to replicate the Payment Request API documented and updated on [w3c.github.io/payment-request](https://w3c.github.io/payment-request/.).
 
